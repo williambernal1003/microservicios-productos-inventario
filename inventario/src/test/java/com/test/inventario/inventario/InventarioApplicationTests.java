@@ -7,7 +7,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 class InventarioApplicationTests {
 
 	@Test
-	void contextLoads() {
-	}
+    void contextLoads() {
+        
+    }
+	
+	@Test
+    void mainMethodRunsSuccessfully() {
+        InventarioApplication.main(new String[]{});
+    }
 
 }
