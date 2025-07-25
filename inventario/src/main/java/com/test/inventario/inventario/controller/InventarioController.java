@@ -15,6 +15,8 @@ import com.test.inventario.inventario.dto.InventarioDTO;
 import com.test.inventario.inventario.service.InventarioService;
 import com.test.inventario.inventario.util.Responses;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/inventario")
 public class InventarioController {
@@ -33,12 +35,12 @@ public class InventarioController {
     }
 
     @PostMapping("/comprar")
-    public Responses comprarProducto(@RequestBody CompraRequest request) {
+    public Responses comprarProducto(@Valid @RequestBody CompraRequest request) {
         return inventarioService.procesarCompra(request.getProductoId(), request.getCantidad());
     }
     
     @PostMapping
-    public Responses crearInventario(@RequestBody InventarioDTO inventarioDTO) {
+    public Responses crearInventario(@Valid @RequestBody InventarioDTO inventarioDTO) {
         return inventarioService.crearInventario(inventarioDTO);
     }
 }

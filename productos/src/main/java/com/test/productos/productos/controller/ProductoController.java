@@ -14,6 +14,8 @@ import com.test.productos.productos.model.Producto;
 import com.test.productos.productos.service.ProductoService;
 import com.test.productos.productos.util.Responses;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/productos")
 public class ProductoController {
@@ -39,7 +41,7 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ResponseEntity<Responses> crearProducto(@RequestBody Producto producto) {
+    public ResponseEntity<Responses> crearProducto(@Valid @RequestBody Producto producto) {
         Responses response = productoService.crearProducto(producto);
         return response.isError()
                 ? ResponseEntity.badRequest().body(response)
@@ -47,7 +49,7 @@ public class ProductoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Responses> actualizarProducto(@PathVariable Long id, @RequestBody Producto producto) {
+    public ResponseEntity<Responses> actualizarProducto(@PathVariable Long id, @Valid @RequestBody Producto producto) {
         Responses response = productoService.actualizarProducto(id, producto);
         return response.isError()
                 ? ResponseEntity.status(404).body(response)
