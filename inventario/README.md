@@ -1,48 +1,80 @@
+ API Inventario - Spring Boot
+Este proyecto es una API REST para la gestión del inventario de productos. 
+Permite crear registros de inventario, consultar la cantidad disponible por producto, 
+actualizar stock y procesar compras.
 
----
+ Implementa documentación Swagger y es compatible con herramientas como Postman.
+ Utiliza una base de datos en memoria H2 solo para fines de prueba técnica.
+ El proyecto corre sobre el puerto 8082.
 
-## ✅ `inventario/README.md`
-
-```markdown
-# Microservicio Inventario
-
-Este microservicio gestiona el stock de productos. Permite crear inventario, consultar cantidades, actualizarlas y realizar compras. Se comunica con el microservicio de Productos para validar que el producto exista antes de operar.
-
-Este servicio corre en el puerto **8082**.
-
----
-
-## 📦 Tecnologías utilizadas
-
+ Tecnologías utilizadas
 - Java 17
-- Spring Boot
-- Maven
-- API REST
-- H2 Database
-- Docker
-- Comunicación REST entre microservicios
+- Spring Boot 3+
+- Spring Web
+- Spring Validation
+- Swagger (OpenAPI)
+- Base de datos H2 (en memoria)
 
----
+ Requisitos
+- JDK 17+
+- Maven 3.8+
+- Postman (opcional)
 
-## 📌 Endpoints disponibles
+ Levantar el proyecto
+1. Clonar el repositorio:
+   git clone https://github.com/usuario/inventario-api.git
+   cd inventario-api
 
-| Método | Endpoint                | Descripción                                       |
-|--------|-------------------------|---------------------------------------------------|
-| GET    | /inventario/{id}        | Consultar cantidad disponible por producto ID     |
-| PUT    | /inventario/{id}?cantidad=X | Actualizar cantidad del producto                |
-| POST   | /inventario/comprar     | Comprar un producto y descontar stock            |
-| POST   | /inventario             | Crear inventario para un producto                |
+2. Ejecutar con Maven:
+   mvn spring-boot:run
 
----
+3. Acceder a Swagger:
+   http://localhost:8082/swagger-ui/index.html
 
-## 🧪 Ejemplos de uso con Postman
+ Seguridad
+Este proyecto no implementa autenticación JWT. Todos los endpoints están públicos durante la prueba.
+ Endpoints disponibles
+1.  Consultar inventario por producto ID
+   - Método: GET
+   - URL: /inventario/{id}
+   - Requiere token:  No
+   - Ejemplo:
+     GET http://localhost:8082/inventario/1
 
-### Crear inventario
+2.  Actualizar cantidad en inventario
+   - Método: PUT
+   - URL: /inventario/{id}?cantidad=30
+   - Requiere token:  No
+   - Ejemplo:
+     PUT http://localhost:8082/inventario/1?cantidad=20
 
-**POST http://localhost:8082/inventario**
+3.  Procesar compra
+   - Método: POST
+   - URL: /inventario/comprar
+   - Requiere token:  No
+   - Content-Type: application/json
+   - RequestBody:
+     {
+       "productoId": 1,
+       "cantidad": 2
+     }
 
-```json
-{
-  "productoId": 1,
-  "cantidad": 10
-}
+4.  Crear inventario nuevo
+   - Método: POST
+   - URL: /inventario
+   - Requiere token:  No
+   - Content-Type: application/json
+   - RequestBody:
+     {
+       "productoId": 1,
+       "cantidad": 100
+     }
+
+ Manejo de errores
+Este proyecto implementa un controlador global de excepciones que captura y formatea errores como:
+- Validación de campos (400 Bad Request)
+- Recurso no encontrado (404 Not Found)
+- Error interno (500 Internal Server Error)
+
+ Pruebas y validaciones
+Se recomienda usar Postman o Swagger UI para probar todos los servicios.

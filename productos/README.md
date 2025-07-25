@@ -1,41 +1,228 @@
-# Microservicio Productos
+API Productos - Spring Boot + JWT
 
-Este microservicio gestiona el catálogo de productos: permite crearlos, listarlos, actualizarlos, eliminarlos y obtenerlos por ID. Se ejecuta en el puerto **8081** y está diseñado para ser consumido mediante herramientas como Postman o desde otros microservicios (como el de Inventario).
+Este proyecto es una API REST para la gestión de productos. Incluye autenticación mediante JWT, control de acceso a endpoints y pruebas unitarias.
 
----
+Tecnologías utilizadas
 
-## 📦 Tecnologías utilizadas
+\- Java 17
 
-- Java 17
-- Spring Boot
-- Maven
-- API REST
-- H2 Database
-- Docker
+\- Spring Boot 3+
 
----
+\- Spring Security
 
-## 📌 Endpoints disponibles
+\- JWT (JSON Web Token)
 
-| Método | Endpoint             | Descripción                              |
-|--------|----------------------|------------------------------------------|
-| GET    | /productos           | Listar todos los productos               |
-| GET    | /productos/{id}      | Obtener un producto por su ID            |
-| POST   | /productos           | Crear un nuevo producto                  |
-| PUT    | /productos/{id}      | Actualizar un producto existente         |
-| DELETE | /productos/{id}      | Eliminar un producto                     |
+\- Maven
 
----
+\- JUnit y Mockito para testing
 
-## 🧪 Ejemplos de uso con Postman
+&nbsp;Requisitos
 
-### Crear producto
+\- JDK 17+
 
-**POST http://localhost:8081/productos**
+\- Maven 3.8+
+
+\- Postman (opcional, para probar)
+
+&nbsp;Levantar el proyecto
+
+1\. Clonar el repositorio:
+
+```bash
+
+git clone https://github.com/usuario/productos-api.git
+
+cd productos-api
+
+```
+
+2\. Construir el proyecto:
+
+```bash
+
+mvn clean install
+
+```
+
+3\. Ejecutar:
+
+```bash
+
+mvn spring-boot:run
+
+```
+
+La aplicación quedará disponible en `http://localhost:8081`
+
+&nbsp;Autenticación
+
+Este proyecto usa JWT para proteger sus endpoints. Para autenticarte:
+
+
+
+\### Endpoint de Login
+
+
+
+`POST /auth/login`
+
+
+
+\*\*Request:\*\*
 
 ```json
+
 {
-  "nombre": "Teclado Mecánico",
-  "descripcion": "Teclado RGB con switches rojos",
-  "precio": 150000
+
+&nbsp; "username": "admin",
+
+&nbsp; "password": "admin123"
+
 }
+
+```
+
+
+
+\*\*Response:\*\*
+
+```json
+
+{
+
+&nbsp; "token": "eyJhbGciOiJIUzI1NiIsInR5cCI..."
+
+}
+
+```
+
+
+
+Este token se debe incluir en los siguientes requests usando el header:
+
+```http
+
+Authorization: Bearer <token>
+
+```
+
+&nbsp;Endpoints públicos (No requieren token)
+
+\- `POST /auth/login`
+
+\- `GET /productos/{id}`
+
+\- `PUT /productos/{id}`
+
+&nbsp;Endpoints protegidos (Requieren token)
+
+\### `GET /productos`
+
+Obtiene todos los productos.
+
+
+
+\*\*Header:\*\*
+
+```http
+
+Authorization: Bearer <token>
+
+```
+
+
+
+\*\*Response:\*\*
+
+```json
+
+\[
+
+&nbsp; {
+
+&nbsp;   "id": 1,
+
+&nbsp;   "nombre": "Camiseta",
+
+&nbsp;   "precio": 20.5
+
+&nbsp; }
+
+]
+
+```
+
+
+
+---
+
+
+
+\### `POST /productos`
+
+Crea un nuevo producto.
+
+
+
+\*\*Header:\*\*
+
+```http
+
+Authorization: Bearer <token>
+
+```
+
+
+
+\*\*Body:\*\*
+
+```json
+
+{
+
+&nbsp; "nombre": "Zapatos",
+
+&nbsp; "precio": 50.0
+
+}
+
+```
+
+
+
+---
+
+
+
+\### `DELETE /productos/{id}`
+
+Elimina un producto por su ID.
+
+
+
+\*\*Header:\*\*
+
+```http
+
+Authorization: Bearer <token>
+
+```
+
+&nbsp;Pruebas unitarias
+
+Puedes ejecutar los tests con:
+
+```bash
+
+mvn test
+
+```
+
+&nbsp;Contacto
+
+Desarrollado por William Sneider Bernal Gil
+
+Email: williambernalcorredoresonline@gmail.com
+
+
+
