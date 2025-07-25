@@ -1,10 +1,10 @@
-# 🔧 Microservicios Productos & Inventario – Prueba Técnica Linktic
+# Microservicios Productos & Inventario – Prueba Técnica Linktic
 
 Este proyecto está conformado por dos microservicios construidos con Spring Boot: **Productos** e **Inventario**. Ambos se comunican entre sí y se pueden levantar simultáneamente usando Docker y `docker-compose`.
 
 ---
 
-## 📦 Requisitos para la ejecución
+## Requisitos para la ejecución
 
 - Docker  
 - Docker Compose  
@@ -15,7 +15,7 @@ Este proyecto está conformado por dos microservicios construidos con Spring Boo
 
 ---
 
-## 📂 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 .
@@ -30,7 +30,7 @@ Este proyecto está conformado por dos microservicios construidos con Spring Boo
 
 ---
 
-## 🚀 Cómo levantar los microservicios
+## Cómo levantar los microservicios
 
 1. Clona el repositorio con ambos microservicios y el archivo `docker-compose.yml`.
 
@@ -47,18 +47,18 @@ docker-compose up --build
 
 Esto construirá y levantará los servicios en red, exponiéndolos en los siguientes puertos:
 
-- 🧱 `productos`: http://localhost:8081  
-- 📦 `inventario`: http://localhost:8082  
+- `productos`: http://localhost:8081  
+- `inventario`: http://localhost:8082  
 
 ---
 
-## 🔗 Comunicación entre microservicios
+## Comunicación entre microservicios
 
 El microservicio **Productos** consume servicios del microservicio **Inventario** mediante un cliente **Feign**. La red `microservicios_net` definida en `docker-compose` permite que los contenedores se comuniquen entre sí por nombre de servicio (ej: `inventario:8082`).
 
 ---
 
-## 🧾 Contenido del archivo `docker-compose.yml`
+## Contenido del archivo `docker-compose.yml`
 
 ```yaml
 version: '3.8'
@@ -91,7 +91,7 @@ networks:
 
 ---
 
-## ✅ Verificación
+## Verificación
 
 Puedes acceder a la documentación Swagger de cada servicio:
 
