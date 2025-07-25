@@ -1,4 +1,4 @@
-README - Microservicios Productos & Inventario
+Microservicios Productos & Inventario
 Este proyecto está conformado por dos microservicios construidos con Spring Boot: el microservicio de Productos y el microservicio de Inventario. Ambos se comunican entre sí y se pueden levantar de forma simultánea mediante Docker y un archivo docker-compose.yml.
  Requisitos
 - Docker
