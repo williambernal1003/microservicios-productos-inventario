@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  productos:
+    build:
+      context: ./productos
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - inventario
+    networks:
+      - microservicios_net
+
+  inventario:
+    build:
+      context: ./inventario
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - microservicios_net
+
+networks:
+  microservicios_net:
+    driver: bridge
